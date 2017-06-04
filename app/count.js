@@ -10,13 +10,13 @@ exports.countAnswers = {
 
     // Declare a function that counts the time within the specified time
     function myFunction() {
-      console.log (startCount ++);
+      console.log (start ++);
 
-      if (startCount <= endCount) {
+      if (start <= end) {
 
         // setTimeOut will execute my count cfunction (myfunction) once, after a second
         
-        timeAllowed = setTimeout(myFunction, 1000);
+        timeAllowed = setTimeout(myFunction, 100);
       }
     }
 
@@ -26,7 +26,7 @@ exports.countAnswers = {
 
             cancel: function () {
 
-                timeAllowed && clearTimeOut(timeAllowed);
+                timeAllowed && clearTimeout(timeAllowed);
             
       }
 

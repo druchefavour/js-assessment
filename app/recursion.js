@@ -26,6 +26,7 @@ exports.recursionAnswers = {
       dirc.pop();
     }
     processDir(data);
+  }
 
     return fileList;
   },
@@ -68,7 +69,7 @@ exports.recursionAnswers = {
       return result;
     }
 
-    return execute ();
+    return execute();
 
   },
 
@@ -91,44 +92,17 @@ exports.recursionAnswers = {
 }
 
 validParentheses: function (n) {
-  var j = 0; 
-  var num = n.length;
-  var arr = [];
+  if (n === 0) {
+    return [""];
 
-  if (!num) {
+    var result = [];
+    for (var i = 0; i < n; i++) {
+      var lefts = nPair(i);
+      var rights = nPair(n - i - 1);
 
-    return true;
+      for (var l = 0; l < lefts.length; l++)
+        for (var r = 0; r < rights.length; r++)
+          result.push("(" + lefts[l] + ")" + rights[r]);
   }
-
-  if ((num % 2) !== 0) {
-
-    return false;
-
-  }
-
-  while (j < num) {
-
-    var s = n[i];
-    if (s == "{") {
-
-      arr.push(s);
-
-    } else if (s == "}") {
-
-      if (arr.length) {
-
-        arr.pop();
-
-      } else {
-
-        return false;
-
-      }
-    }
-
-    j++;
-
-  }
-
-  return true;
+  return result;
 };

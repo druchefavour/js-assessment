@@ -18,16 +18,18 @@ exports.functionsAnswers = {
   makeClosures: function(arr, fn) {
     // Declare an empty array and a helper function
     var array = [];
-    var hlper = function (j) {
+    var helper = function (val) {
       return function () {
-        return fn(arr[j]);
-      }
+        return fn(val);
+      };
     };
     // loop across the arr
 
-    for (var j = 0; j < arr.length; j++) {
-      array[j] = helper [j];
+    for (var i = 0; i < arr.length; i++) {
+      //array[i] = helper [i];
+      array.push(helper(arr[i]));
       }
+      
       return array; 
   },
 
@@ -65,6 +67,7 @@ exports.functionsAnswers = {
 },
 
 curryIt: function(fn) {
+
   var args1 = Array.prototype.slice.call(arguments);
   var fn = args1[0];
   args1.shift();

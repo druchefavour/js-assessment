@@ -36,6 +36,7 @@ exports.arraysAnswers = {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] === item) {
         itemToRemove = arr.splice(i, 1);
+        i--;
       }
     }
     return arr;
@@ -43,6 +44,7 @@ exports.arraysAnswers = {
 
   // ==============================================
 
+ 
   // Remove an item from an array and return the original array
 
  removeWithoutCopy: function (arr, item) {
@@ -50,12 +52,13 @@ exports.arraysAnswers = {
     // declare a constructor - say newArr
 
     var newArr = new Array();
-     for (var i = 0; i < arr.length; i++) {
-      if (arr[i] != item) {
-        newArr.push(arr[i]);
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === item) {
+        itemToRemove = arr.splice(i, 1);
+        i--;
       }
-     }
-     return newArr;
+    }
+    return arr;
   },
 
   // ===========================================================
