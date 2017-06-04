@@ -3,11 +3,12 @@ exports = typeof window === 'undefined' ? global : window;
 exports.modulesAnswers = {
   createModule: function(str1, str2) {
     return {
-    	answer:function () {
-    		return this.salutation + ', ' + this.name;
+    	sayit:function () {
+    		return this.greeting + ', ' + this.name;
     	},
-    	salutation: str1,  
-    	name: str2      
+    	
+    	name: str2,
+    	greeting: str1      
       }; 
 
     }
