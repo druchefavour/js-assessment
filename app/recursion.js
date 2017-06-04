@@ -6,27 +6,30 @@ exports.recursionAnswers = {
     var fileList = [];
     var dirc = [];
 
+    processDir(data);
+
     function processDir(dir) {
       // declare other variables 
-      var j;
-      var file;
+      //var j;
+      //var file;
       var files = dir.files;
       dirc.push(dir.dir);
 
-      for (j = 0; j < files.length; j++) {
-        file = files[j];
+      for (i = 0; i < files.length; i++) {
+        file = files[i];
         if (typeof file === 'string') {
           if (!dirName || dirc.indexOf(dirName) > -1) {
-            fileList.push(files[j]);
+            fileList.push(files[i]);
           }
         } else {
-          processDir(files[j]);
+          processDir(files[i]);
         }
       }
       dirc.pop();
     }
-    processDir(data);
-  }
+
+    //processDir(data);
+ // }
 
     return fileList;
   },
@@ -35,33 +38,29 @@ exports.recursionAnswers = {
     var tmpArray = [];
     var result = [];
 
-    function logAnswer () {
-      result.push (
-        tmpArray.slice()
-        // Use the slice method to make a copy of tmpArray so that we could still use tmpArray 
-        );
-    }
-    function execute() {
-      var j;
-      var a;
+    return execute(arr);
 
-      for (j = 0; j < arr.length; j++) {
-        a = arr.splice(j, 1)[0];
+    function execute(val) {
+      var i;
+      var itemOnList;
+
+      for (i = 0; i < arr.length; i++) {
+        itemOnList = arr.splice(i, 1)[0];
         // This removes the item at index j
 
-        tmpArray.push(a);
+        tmpArray.push(itemOnList);
         // This adds that item to the array we are constructing
 
         if (arr.length) {
           // recurse over what's left if there is still anything in the array
 
-          execute();
+          execute(arr);
         } else {
 
           // otherwise, log the result
           logAnswer ();
         }
-        arr.splice(j, 0, a);
+        arr.splice(i, 0, itemOnList);
         tmpArray.pop();
 
         // This restores the item we removed at index j and remove it from our temporary array
@@ -69,12 +68,20 @@ exports.recursionAnswers = {
       return result;
     }
 
-    return execute();
+    function logAnswer () {
+      result.push (
+        tmpArray.slice()
+        // Use the slice method to make a copy of tmpArray so that we could still use tmpArray 
+        );
+    }
 
   },
 
   fibonacci: function(n) {
-    var emptyShift = "";
+    function fib(n) {
+      return n < 2 ? n : fib(n-1) + fib(n-2);
+    }
+    /*var emptyShift = "";
     var k;
     
     for (var j = 0; j < k; j++) {
@@ -88,21 +95,24 @@ exports.recursionAnswers = {
         return fibonacci(n - 2) + fibonacci(n - 1);
         console.log(fibonacci(7));
     }
-  }
-}
+  }*/
+  return fib(n);
+},
 
 validParentheses: function (n) {
-  if (n === 0) {
-    return [""];
-
-    var result = [];
-    for (var i = 0; i < n; i++) {
-      var lefts = nPair(i);
-      var rights = nPair(n - i - 1);
-
-      for (var l = 0; l < lefts.length; l++)
-        for (var r = 0; r < rights.length; r++)
-          result.push("(" + lefts[l] + ")" + rights[r]);
-  }
-  return result;
+  var setArray = [];
+  var getParent = function (left, right, current) {
+    if (left == 0 && right == 0) {
+      setArray.push(current);
+    }
+    if (left > 0) {
+      getParent(left-1, right-1, current + '(');
+    }
+    if (right > 0) {
+      getParent(left, right-1, current + ')');
+    }
+    return setArray;
+  };
+  return getParent (n, 0, '');
+}
 };
