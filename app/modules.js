@@ -7,7 +7,7 @@ exports.modulesAnswers = {
     		return this.salutation + ', ' + this.name;
     	},
     	salutation: str1,  
-    	name: str2,      
+    	name: str2      
       }; 
 
     }
