@@ -2,24 +2,26 @@ exports = exports = typeof window === 'undefined' ? global : window;
 
 exports.recursionAnswers = {
   listFiles: function(data, dirName) {
-    //declare variables required for recursion answers and assign empty arrays to them
-    var fileList = [];
-    var dirc = [];
 
-    processDir(data);
+  //declare variables required for recursion answers and assign empty arrays to them
 
-    function processDir(dir) {
-      // declare other variables 
-      //var j;
-      //var file;
-      var files = dir.files;
-      dirc.push(dir.dir);
+  var fileList = [];
+  var dirc = [];
+  processDir(data);
 
-      for (i = 0; i < files.length; i++) {
-        file = files[i];
-        if (typeof file === 'string') {
-          if (!dirName || dirc.indexOf(dirName) > -1) {
-            fileList.push(files[i]);
+  function processDir(dir) {
+  // declare other variables 
+  //var j;
+  //var file;
+  var files = dir.files;
+
+  dirc.push(dir.dir);
+
+  for (i = 0; i < files.length; i++) {
+    file = files[i];
+    if (typeof file === 'string') {
+      if (!dirName || dirc.indexOf(dirName) > -1) {
+        fileList.push(files[i]);
           }
         } else {
           processDir(files[i]);
@@ -106,13 +108,13 @@ validParentheses: function (n) {
       setArray.push(current);
     }
     if (left > 0) {
-      getParent(left-1, right-1, current + '(');
+      getParent(left - 1, right + 1, current + '(');
     }
     if (right > 0) {
-      getParent(left, right-1, current + ')');
+      getParent(left, right - 1, current + ')');
     }
     return setArray;
   };
   return getParent (n, 0, '');
-}
+ }
 };

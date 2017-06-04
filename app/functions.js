@@ -68,12 +68,23 @@ exports.functionsAnswers = {
 
 curryIt: function(fn) {
 
-  var args1 = Array.prototype.slice.call(arguments);
-  var fn = args1[0];
-  args1.shift();
-  return function() {
-    var args2 = Array.prototype.slice.call(arguments);
-    return fn.apply(this, args1.concat(args2));
-    };
+  function applyArgs (_fn, args) {
+    return _fn.apply(null, args);
+  }
+
+  function getExisArgs (exisArgs, expArgsCount ) {
+     return function (currArgs){
+
+      exisArgs.push(currArgs);
+
+    var totalArgsAvail = exisArgs.length === expArgsCount;
+
+    if (totalArgsAvail) {
+      return applyArgs (fn, exisArgs);
+    }
+    return getExisArgs (exisArgs, expArgsCount);
+  };
+}
+return getExisArgs([], fn.length);
   }
  };
